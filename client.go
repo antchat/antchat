@@ -35,6 +35,9 @@ func ServeWs(w http.ResponseWriter, r *http.Request) {
     }
 
     client := newClient(conn)
+    
+    go client.writePump()
+    go client.readPump()
 
     fmt.Println("New Client joined the hub!")
     fmt.Println(client)
