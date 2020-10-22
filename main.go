@@ -14,6 +14,9 @@ func main() {
     http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
         ServeWs(w, r)
     })
+    
+    fs := http.FileServer(http.Dir("./public"))
+    http.Handle("/", fs)
 
     log.Fatal(http.ListenAndServe(*addr, nil))
 }
